@@ -1,0 +1,24 @@
+<section class="container">
+    <h1>Monster List</h1>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Type</th>
+                <th>Alignment</th>
+                <th>Strength</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let monster of monsters">
+                <td>{{ monster.name }}</td>
+                <td>{{ monster.size }}</td>
+                <td>{{ monster.type }}</td>
+                <td>{{ monster.alignment }}</td>
+                <td>{{ monster.strength }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</section>
