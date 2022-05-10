@@ -18,9 +18,19 @@ export class MonstersListComponent implements OnInit {
   getMonsters(): void {
     this.monsterService.getMonsters()
         .subscribe(monsters => {
-          console.log(monsters.results)
-          this.monsters = monsters.results
+          console.log(monsters)
+          this.monsters = monsters
         })
   }
 
+  changePage(direction: string): void {
+    this.monsterService.changePage(direction)
+    this.monsterService.getMonsters()
+        .subscribe(monsters => {
+          console.log(monsters)
+          this.monsters = monsters
+        })
+  }
 }
+
+

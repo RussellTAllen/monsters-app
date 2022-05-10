@@ -4,3 +4,37 @@
     background: black;
     color: white;
 } */
+/* 
+nav button{
+    margin-right: 20px;
+}
+nav button:last-of-type{
+    margin-right: 0;
+} */
+
+.flex {
+    display: flex;
+}
+
+.outer-edges {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .flex button:first-of-type {
+    justify-self: start;
+}
+
+.flex button:last-of-type {
+    justify-self: end;
+} */
+
+.center-block {
+    margin: auto 20rem;
+}
+
+/* .make-nav(@gutter: @grid-gutter-width) {
+
+} */
+
+/* @grid-gutter-width: 30px; */

@@ -7,19 +7,41 @@ import { Observable, of, catchError, map, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class MonsterService {
-  private monstersURL = 'https://api.open5e.com/monsters/'
+  monstersData: [] = []
+  page: number = 1
+  prevPage: number = 1
+  private monstersURL = 'https://api.open5e.com/monsters/?page='+this.page
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type' : 'application/json' })
   }
 
   constructor(private http: HttpClient) { }
 
+  changePage(direction: string): void {
+    this.prevPage = this.page
+    if (direction === "next"){
+      this.page++
+    }else if(this.page > 1){
+      this.page--
+    }
+    this.monstersURL = 'https://api.open5e.com/monsters/?page='+this.page
+  }
+
   getMonsters(): Observable<any> {
-    return this.http.get<any>(this.monstersURL)
-        .pipe(
-          tap(_ => this.log('Fetched Monsters!')),
-          catchError(this.handleError<any>('getMonsters'))
-        )
+    console.log(this.monstersURL)
+    if (!this.monstersData.length || this.page !== this.prevPage){
+      this.prevPage = this.page
+      return this.http.get<any>(this.monstersURL)
+          .pipe(
+            map(responseData => {
+              this.monstersData = responseData.results
+              return this.monstersData
+            }),  
+            tap(_ => this.log('Fetched Monsters!')),
+            catchError(this.handleError<any>('getMonsters'))
+          )
+    }
+    return of(this.monstersData)
   }
 
   private log(message: string) {
