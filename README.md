@@ -1,5 +1,9 @@
 # Monsters
 
+This is just an app I'm building to refresh my Angular knowledge and play around with various techniques.
+
+###
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
 
 ## Development server
