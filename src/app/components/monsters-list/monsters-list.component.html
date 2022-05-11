@@ -1,5 +1,9 @@
 <section class="container">
     <h1>Monster List</h1>
+    <h4>Click two monsters to select them for battle!</h4>
+    <h5>Monster 1: {{ selectedMonsters[0] }}</h5>
+    <h5>Monster 2: {{ selectedMonsters[1] }}</h5>
+
     <table class="table table-bordered table-hover table-responsive">
         <thead>
             <tr>
@@ -8,18 +12,28 @@
                 <th>Type</th>
                 <th>Alignment</th>
                 <th>Strength</th>
+                <th>Pic</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let monster of monsters">
+            <tr class="monster-row"
+                *ngFor="let monster of monsters"
+                (click)="selectMonster(monster.name)">
                 <td>{{ monster.name }}</td>
                 <td>{{ monster.size }}</td>
                 <td>{{ monster.type }}</td>
                 <td>{{ monster.alignment }}</td>
                 <td>{{ monster.strength }}</td>
+                <td>
+                    <div *ngIf="monster.img_main">
+                        This monster has an image
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <!-- TODO: abstract into its own component -->
     <div class="outer-edges">
         <button class="btn btn-primary" (click)="changePage('previous')">Previous Page</button>
         <button class="btn btn-primary" (click)="changePage('next')">Next Page</button>

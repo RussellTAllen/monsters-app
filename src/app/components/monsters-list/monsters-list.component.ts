@@ -7,7 +7,8 @@ import { MonsterService } from 'src/app/monster.service';
   styleUrls: ['./monsters-list.component.css']
 })
 export class MonstersListComponent implements OnInit {
-  monsters: any = []
+  monsters: Array<any> = []
+  selectedMonsters: Array<string> = []
 
   constructor(private monsterService: MonsterService) { }
 
@@ -25,12 +26,17 @@ export class MonstersListComponent implements OnInit {
 
   changePage(direction: string): void {
     this.monsterService.changePage(direction)
-    this.monsterService.getMonsters()
-        .subscribe(monsters => {
-          console.log(monsters)
-          this.monsters = monsters
-        })
+    this.getMonsters()
   }
+
+  selectMonster(monster: string): void {
+    this.selectedMonsters.unshift(monster)
+
+    if (this.selectedMonsters.length > 2){
+      this.selectedMonsters.pop()
+    }
+  }
+
 }
 
 

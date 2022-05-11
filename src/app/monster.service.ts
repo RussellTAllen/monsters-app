@@ -7,7 +7,7 @@ import { Observable, of, catchError, map, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class MonsterService {
-  monstersData: [] = []
+  monstersData: Array<object> = []
   page: number = 1
   prevPage: number = 1
   private monstersURL = 'https://api.open5e.com/monsters/?page='+this.page
@@ -21,14 +21,13 @@ export class MonsterService {
     this.prevPage = this.page
     if (direction === "next"){
       this.page++
-    }else if(this.page > 1){
+    }else if (this.page > 1){
       this.page--
     }
     this.monstersURL = 'https://api.open5e.com/monsters/?page='+this.page
   }
 
   getMonsters(): Observable<any> {
-    console.log(this.monstersURL)
     if (!this.monstersData.length || this.page !== this.prevPage){
       this.prevPage = this.page
       return this.http.get<any>(this.monstersURL)
