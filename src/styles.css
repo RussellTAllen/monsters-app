@@ -36,3 +36,12 @@ nav button:last-of-type{
 .monster-row {
     cursor: pointer;
 }
+
+.image-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px black;
+
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { MonsterService } from 'src/app/monster.service';
 
 @Component({
@@ -10,7 +10,10 @@ export class MonstersListComponent implements OnInit {
   monsters: Array<any> = []
   selectedMonsters: Array<string> = []
 
-  constructor(private monsterService: MonsterService) { }
+  constructor(
+    private monsterService: MonsterService,
+    private renderer: Renderer2
+    ) { }
 
   ngOnInit(): void {
     this.getMonsters()
@@ -37,6 +40,22 @@ export class MonstersListComponent implements OnInit {
     }
   }
 
-}
+  showImage(imageSrc: string): void {
+    const imageEl = this.renderer.selectRootElement('.image-popup')
+    const image = document.createElement('img')
+    image.src = imageSrc
+    imageEl.classList.remove('hidden')
+    imageEl.appendChild(image)
 
+    setTimeout(() => {
+      imageEl.addEventListener('click', removeImage)
+    }, 100)
+
+    const removeImage = (): void => {
+      imageEl.classList.add('hidden')
+      imageEl.removeEventListener('click', removeImage)
+    }
+  }
+
+}
 

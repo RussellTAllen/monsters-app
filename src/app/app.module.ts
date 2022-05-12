@@ -7,13 +7,15 @@ import { MonsterSearchComponent } from './components/monster-search/monster-sear
 import { MonstersListComponent } from './components/monsters-list/monsters-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PageNavComponent } from './components/page-nav/page-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MonsterSearchComponent,
     MonstersListComponent,
-    NavbarComponent
+    NavbarComponent,
+    PageNavComponent
   ],
   imports: [
     BrowserModule,
