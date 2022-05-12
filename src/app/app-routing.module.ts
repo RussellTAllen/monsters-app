@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+
+import { BattleComponent } from './components/battle/battle.component';
 import { MonstersListComponent } from './components/monsters-list/monsters-list.component';
 
 const routes: Routes = [
-  { path: 'monsters-list', component: MonstersListComponent }
+  { path: 'monsters-list', component: MonstersListComponent },
+  { path: 'battle', component: BattleComponent }
 ]
-
 
 @NgModule({
   declarations: [],

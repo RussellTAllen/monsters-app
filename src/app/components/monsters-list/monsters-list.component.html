@@ -1,8 +1,8 @@
 <section class="container">
     <h1>Monster List</h1>
     <h4>Double-click monsters to select them for battle!</h4>
-    <h5>Monster 1: {{ selectedMonsters[0] }}</h5>
-    <h5>Monster 2: {{ selectedMonsters[1] }}</h5>
+    <h5>Monster 1: {{ selectedMonsters[0]?.name }}</h5>
+    <h5>Monster 2: {{ selectedMonsters[1]?.name }}</h5>
 
     <section class="image-popup hidden"></section>
 
@@ -14,23 +14,29 @@
                 <th>Size</th>
                 <th>Type</th>
                 <th>Alignment</th>
+                <th>Hit Points</th>
                 <th>Strength</th>
+                <th>Armor Class</th>
+                <th># of Attacks</th>
                 <th>Pic</th>
             </tr>
         </thead>
         <tbody>
             <tr class="monster-row"
                 *ngFor="let monster of monsters"
-                (dblclick)="selectMonster(monster.name)">
+                (dblclick)="selectMonster(monster)">
                 <td>{{ monster.name }}</td>
                 <td>{{ monster.size }}</td>
                 <td>{{ monster.type }}</td>
                 <td>{{ monster.alignment }}</td>
+                <td>{{ monster.hit_points }}</td>
                 <td>{{ monster.strength }}</td>
+                <td>{{ monster.armor_class }}</td>
+                <td>{{ monster.actions.length }}</td>
                 <td *ngIf="monster.img_main">
                     <button 
                         class="btn btn-default" 
-                        (click)="showImage(monster.img_main)">
+                        (click)="showImage(monster.name, monster.img_main)">
                         Monster Image
                     </button>
                 </td>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Output, Renderer2 } from '@angular/core';
 import { MonsterService } from 'src/app/monster.service';
 
 @Component({
@@ -8,7 +8,8 @@ import { MonsterService } from 'src/app/monster.service';
 })
 export class MonstersListComponent implements OnInit {
   monsters: Array<any> = []
-  selectedMonsters: Array<string> = []
+  selectedMonsters: Array<any> = this.monsterService.selectedMonsters
+  
 
   constructor(
     private monsterService: MonsterService,
@@ -17,6 +18,7 @@ export class MonstersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMonsters()
+    console.log(this.selectedMonsters)
   }
 
   getMonsters(): void {
@@ -32,19 +34,25 @@ export class MonstersListComponent implements OnInit {
     this.getMonsters()
   }
 
-  selectMonster(monster: string): void {
+  selectMonster(monster: object): void {
     this.selectedMonsters.unshift(monster)
 
     if (this.selectedMonsters.length > 2){
       this.selectedMonsters.pop()
     }
+
+    this.monsterService.selectedMonsters = this.selectedMonsters
   }
 
-  showImage(imageSrc: string): void {
+  showImage(name: string, imageSrc: string): void {
     const imageEl = this.renderer.selectRootElement('.image-popup')
+    const nameTag = document.createElement('h1')
     const image = document.createElement('img')
+    nameTag.textContent = name
+    nameTag.classList.add('monster-name')
     image.src = imageSrc
     imageEl.classList.remove('hidden')
+    imageEl.appendChild(nameTag)
     imageEl.appendChild(image)
 
     setTimeout(() => {

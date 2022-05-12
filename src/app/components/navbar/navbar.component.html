@@ -1,14 +1,19 @@
 <nav class="center-block navbar navbar-default">
     <ul class="nav nav-tabs">
-        <li role="presentation" 
+        <li
             [class.active]="navLocation === '/'"
             (click)="toggleNav()">
             <a routerLink="/">Home</a>
         </li>
-        <li role="presentation"
+        <li
             [class.active]="navLocation === '/monsters-list'"
             (click)="toggleNav()">
             <a routerLink="/monsters-list">Monster List</a>
+        </li>
+        <li
+            [class.active]="navLocation === '/battle'"
+            (click)="toggleNav()">
+            <a routerLink="/battle">Battle!</a>
         </li>
     </ul>
     <!-- <a routerLink="/monsters-list" class="col-md-3 col-lg-offset-1 btn btn-lg btn-default active">Monster Battle</a> -->

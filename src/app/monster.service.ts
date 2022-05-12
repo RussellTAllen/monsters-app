@@ -8,8 +8,10 @@ import { Observable, of, catchError, map, tap } from 'rxjs';
 })
 export class MonsterService {
   monstersData: Array<object> = []
+  selectedMonsters: Array<object> = []
   page: number = 1
   prevPage: number = 1
+
   private monstersURL = 'https://api.open5e.com/monsters/?page='+this.page
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type' : 'application/json' })
@@ -33,7 +35,11 @@ export class MonsterService {
       return this.http.get<any>(this.monstersURL)
           .pipe(
             map(responseData => {
-              this.monstersData = responseData.results
+              const { results } = responseData
+              results.forEach((monst: any) => {
+                monst.actions = monst.actions.filter((action: any) => "attack_bonus" in action)
+              })
+              this.monstersData = results
               return this.monstersData
             }),  
             tap(_ => this.log('Fetched Monsters!')),

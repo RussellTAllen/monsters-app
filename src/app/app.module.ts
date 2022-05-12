@@ -8,6 +8,7 @@ import { MonstersListComponent } from './components/monsters-list/monsters-list.
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNavComponent } from './components/page-nav/page-nav.component';
+import { BattleComponent } from './components/battle/battle.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PageNavComponent } from './components/page-nav/page-nav.component';
     MonsterSearchComponent,
     MonstersListComponent,
     NavbarComponent,
-    PageNavComponent
+    PageNavComponent,
+    BattleComponent
   ],
   imports: [
     BrowserModule,

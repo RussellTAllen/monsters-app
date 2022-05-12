@@ -1,0 +1,74 @@
+<section class="container">
+    <h1>Battle!</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <!-- <h2>{{ selectedMonsters?.first?.name }}</h2> -->
+            <h2>Monster 1 Name</h2>
+            <ul>
+                <li>
+                    <span>Size:</span>
+                    <span>{{ selectedMonsters?.first?.size }}</span>
+                </li>
+                <li>
+                    <span>Type:</span>
+                    <span>{{ selectedMonsters?.first?.type }}</span>
+                </li>
+                <li>
+                    <span>Alignment:</span>
+                    <span>{{ selectedMonsters?.first?.alignment }}</span>
+                </li>
+                <li>
+                    <span>Hit Points:</span>
+                    <span>{{ selectedMonsters?.first?.hit_points }}</span>
+                </li>
+                <li>
+                    <span>Strength:</span>
+                    <span>{{ selectedMonsters?.first?.strength }}</span>
+                </li>
+                <li>
+                    <span>Armor Class:</span>
+                    <span>{{ selectedMonsters?.first?.armor_class }}</span>
+                </li>
+                <li>
+                    <span># of Attacks</span>
+                    <span>{{ selectedMonsters?.first?.actions.length }}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="battle-details col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <!-- <h2><span></span><span>{{ selectedMonsters?.second.name }}</span></h2> -->
+            <h2>Monster 2 Name</h2>
+            <li>
+                <span>Size:</span>
+                <span>{{ selectedMonsters?.second?.size }}</span>
+            </li>
+            <li>
+                <span>Type:</span>
+                <span>{{ selectedMonsters?.second?.type }}</span>
+            </li>
+            <li>
+                <span>Alignment:</span>
+                <span>{{ selectedMonsters?.second?.alignment }}</span>
+            </li>
+            <li>
+                <span>Hit Points:</span>
+                <span>{{ selectedMonsters?.second?.hit_points }}</span>
+            </li>
+            <li>
+                <span>Strength:</span>
+                <span>{{ selectedMonsters?.second?.strength }}</span>
+            </li>
+            <li>
+                <span>Armor Class:</span>
+                <span>{{ selectedMonsters?.second?.armor_class }}</span>
+            </li>
+            <li>
+                <span># of Attacks</span>
+                <span>{{ selectedMonsters?.second?.actions.length }}</span>
+            </li>
+        </div>
+    </div>
+</section>

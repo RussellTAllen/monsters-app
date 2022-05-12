@@ -4,13 +4,6 @@
     background: black;
     color: white;
 } */
-/* 
-nav button{
-    margin-right: 20px;
-}
-nav button:last-of-type{
-    margin-right: 0;
-} */
 
 .flex {
     display: flex;
@@ -21,14 +14,6 @@ nav button:last-of-type{
     justify-content: space-between;
 }
 
-/* .flex button:first-of-type {
-    justify-self: start;
-}
-
-.flex button:last-of-type {
-    justify-self: end;
-} */
-
 .center-block {
     margin: auto 20rem;
 }
@@ -37,11 +22,19 @@ nav button:last-of-type{
     cursor: pointer;
 }
 
+.monster-name {
+    background-color: #eeded1;
+    text-align: center;
+    font-size: 70px;
+    font-weight: bold;
+    line-height: 2;
+    margin: 0;
+}
+
 .image-popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 10px black;
-
 }
