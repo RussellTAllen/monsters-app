@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MonsterService } from 'src/app/monster.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { MonsterService } from 'src/app/monster.service';
   styleUrls: ['./battle.component.css']
 })
 export class BattleComponent implements OnInit {
-  selectedMonsters: any = {
+  @Input() selectedMonsters: any = {
     'first': this.monsterService.selectedMonsters[0] && this.monsterService.selectedMonsters[0],
     'second': this.monsterService.selectedMonsters[1] && this.monsterService.selectedMonsters[1]
   }

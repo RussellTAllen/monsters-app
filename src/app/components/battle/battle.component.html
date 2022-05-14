@@ -25,6 +25,10 @@
                     <span class="badge">{{ selectedMonsters?.first?.strength }}</span>
                 </li>
                 <li class="list-group-item">
+                    <span>Dexterity:</span>
+                    <span class="badge">{{ selectedMonsters?.first?.dexterity }}</span>
+                </li>
+                <li class="list-group-item">
                     <span>Armor Class:</span>
                     <span class="badge">{{ selectedMonsters?.first?.armor_class }}</span>
                 </li>
@@ -34,9 +38,12 @@
                 </li>
             </ul>
         </div>
-        <div class="battle-details col-md-4">
+        
+        <app-battle-details 
+            [battleMonsters]="selectedMonsters"
+            class="battle-details col-md-4">
+        </app-battle-details>
 
-        </div>
         <div class="col-md-4">
             <h2>{{ selectedMonsters?.second?.name }}</h2>
             <li class="list-group-item">
@@ -58,6 +65,10 @@
             <li class="list-group-item">
                 <span>Strength:</span>
                 <span class="badge">{{ selectedMonsters?.second?.strength }}</span>
+            </li>
+            <li class="list-group-item">
+                <span>Dexterity:</span>
+                <span class="badge">{{ selectedMonsters?.first?.dexterity }}</span>
             </li>
             <li class="list-group-item">
                 <span>Armor Class:</span>

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNavComponent } from './components/page-nav/page-nav.component';
 import { BattleComponent } from './components/battle/battle.component';
+import { BattleDetailsComponent } from './components/battle-details/battle-details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BattleComponent } from './components/battle/battle.component';
     MonstersListComponent,
     NavbarComponent,
     PageNavComponent,
-    BattleComponent
+    BattleComponent,
+    BattleDetailsComponent
   ],
   imports: [
     BrowserModule,
