@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MonsterService } from 'src/app/monster.service';
-import { MonstersListComponent } from '../monsters-list/monsters-list.component';
+// import { MonstersListComponent } from '../monsters-list/monsters-list.component';
 
 @Component({
   selector: 'app-page-nav',
@@ -8,18 +8,23 @@ import { MonstersListComponent } from '../monsters-list/monsters-list.component'
   styleUrls: ['./page-nav.component.css']
 })
 export class PageNavComponent implements OnInit {
+  @Output() pageEvent = new EventEmitter<string>()
 
   constructor(
     private monsterService: MonsterService,
-    private monstersList: MonstersListComponent
+    // private monstersList: MonstersListComponent
     ) { }
 
   ngOnInit(): void {
   }
 
   changePage(direction: string): void {
-    this.monsterService.changePage(direction)
-    this.monstersList.getMonsters()
+    // ONE METHOD - imports the component and fires the function from here...
+    // this.monsterService.changePage(direction)
+    // this.monstersList.getMonsters()
+
+    // Refactored to use EventEmitter - not sure which is "best practice"
+    this.pageEvent.emit(direction)
   }
 
 }

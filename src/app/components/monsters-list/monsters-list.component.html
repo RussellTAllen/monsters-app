@@ -6,7 +6,8 @@
 
     <section class="image-popup hidden"></section>
 
-    <app-page-nav></app-page-nav>
+    <app-page-nav (pageEvent)="handlePageEvent($event)"></app-page-nav>
+
     <table class="table table-bordered table-hover table-responsive">
         <thead>
             <tr>
@@ -47,6 +48,6 @@
         </tbody>
     </table>
 
-    <app-page-nav></app-page-nav>
+    <app-page-nav (pageEvent)="handlePageEvent($event)"></app-page-nav>
 
 </section>

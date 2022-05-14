@@ -9,7 +9,6 @@ import { MonsterService } from 'src/app/monster.service';
 export class MonstersListComponent implements OnInit {
   monsters: Array<any> = []
   selectedMonsters: Array<any> = this.monsterService.selectedMonsters
-  
 
   constructor(
     private monsterService: MonsterService,
@@ -29,10 +28,17 @@ export class MonstersListComponent implements OnInit {
         })
   }
 
-  changePage(direction: string): void {
+  // Same as below, but I was calling this by importing this Component into page-nav
+  // changePage(direction: string): void {
+  //   this.monsterService.changePage(direction)
+  //   this.getMonsters()
+  // }
+
+  handlePageEvent(direction: string): void {
     this.monsterService.changePage(direction)
     this.getMonsters()
   }
+
 
   selectMonster(monster: object): void {
     this.selectedMonsters.unshift(monster)
