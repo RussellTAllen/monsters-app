@@ -12,7 +12,7 @@ export class MonsterService {
   private page: number = 1
   private prevPage: number = 1
   private monstersURL = 'https://api.open5e.com/monsters/?page='+this.page
-  
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type' : 'application/json' })
   }
@@ -37,7 +37,8 @@ export class MonsterService {
             map(responseData => {
               const { results } = responseData
               results.forEach((monst: any) => {
-                monst.actions = monst.actions.filter((action: any) => "attack_bonus" in action)
+                if (monst.actions)
+                  monst.actions = monst.actions.filter((action: any) => "attack_bonus" in action)
               })
               this.monstersData = results
               return this.monstersData
