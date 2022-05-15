@@ -33,6 +33,8 @@ export class BattleDetailsComponent implements OnInit {
 
     if (!this.initiative) this.getInitiative()
 
+    document.querySelector('.bottom-button')?.classList.remove('hidden')
+
     // Handle attacks
     for (let turn = 1; turn <=2; turn++){
       const attacking = turn === 1 ? this.initiative : this.notInit
@@ -40,43 +42,43 @@ export class BattleDetailsComponent implements OnInit {
       const attackingMonster = this.battleMonsters[attacking]
       const defendingMonster = this.battleMonsters[defending]
 
-      console.log('attack', attacking)
-      console.log('def', defending)
-      console.log('atking', attackingMonster)
-      console.log('defing', defendingMonster)
+      // TODO:  - make this print over the Hit points in the DOM and fix bug
+      // this needs to be accessible outside this loop otherwise the defending monst only dies if it gets killed in one attack
+      let defMonsterHP = defendingMonster.hit_points
 
+      const ul = document.createElement('ul')
+      ul.classList.add('list-group')
 
       // Handle each specific attack the monster has
       for (let i = 0; i < attackingMonster.actions.length; i++){
         let totalDmg = 0
-        let attackName = ''
+        let attackName = attackingMonster.actions[i].name
+        if (attackName.includes('(')) attackName = attackName.slice(0, attackName.indexOf('(') + 1)
 
         const atk = attackingMonster.actions[i]
         let dice = Number(atk.damage_dice.slice(0, atk.damage_dice.indexOf('d')))
-        let dmgPerDie = atk.damage_dice.includes('+') ?
+        const dmgPerDie = atk.damage_dice.includes('+') ?
                         Number(atk.damage_dice.slice(atk.damage_dice.indexOf('d')+1, atk.damage_dice.indexOf('+'))):
                         Number(atk.damage_dice.slice(atk.damage_dice.indexOf('d')+1)) 
         
         while(dice){
           const dmg = Math.floor(Math.random() * dmgPerDie)
 
-          // console.log('dmg', dmg)
-          // console.log('HP', defendingMonster.hit_points)
-          defendingMonster.hit_points -= dmg
+          defMonsterHP -= dmg
           totalDmg += dmg
 
-          if (defendingMonster.hit_points <= 0){
-            const battleMessage = attackingMonster.name + " hit " + defendingMonster.name + " for " + totalDmg + "HP."
-            this.printBattleMessage(battleMessage)
+          if (defMonsterHP <= 0){
+            const battleMessage = `${attackingMonster.name} strikes ${defendingMonster.name} with ${attackName} for ${totalDmg}HP!`
+            this.printBattleMessage(battleMessage, ul)
             this.battleResult = defendingMonster.name + " has been vanquished!"
             return
           }
-
+          
           dice--
         }
-
-        const battleMessage = attackingMonster.name + " hit " + defendingMonster.name + " for " + totalDmg + "HP."
-        this.printBattleMessage(battleMessage)
+        
+        const battleMessage = `${attackingMonster.name} strikes ${defendingMonster.name} with ${attackName} for ${totalDmg}HP!`
+        this.printBattleMessage(battleMessage, ul)
       }
     }
   }
@@ -97,11 +99,15 @@ export class BattleDetailsComponent implements OnInit {
     else console.log('not enough monsters to battle!')
   }
 
-  printBattleMessage(msg: string) {
+  printBattleMessage(msg: string, list: Element) {
     const li = document.createElement('li')
+    li.classList.add('list-group-item')
     li.textContent = msg
-    const ul = document.querySelector('.battle-messages')
-    ul?.appendChild(li)
+
+    list.appendChild(li)
+
+    const printTo = document.querySelector('.battle-messages')
+    printTo?.appendChild(list)
   }
 
 }

@@ -1,13 +1,6 @@
 <h2 *ngIf="!battleMonsters.first || !battleMonsters.second">Select Two Monsters to do Battle!</h2>
 <h2 *ngIf="battleMonsters.first || battleMonsters.second">Let the battle begin!</h2>
 
-<button 
-    type="button" 
-    class="btn btn-warning"
-    (click)="makeAttack()"
-    [disabled]="!battleMonsters.first || !battleMonsters.second || battleResult">
-    Attack!
-</button>
 
 <hr>
 
@@ -17,6 +10,22 @@
     
 </div>
 
-<ul class="battle-messages"></ul>
+<button 
+    type="button" 
+    class="btn btn-warning"
+    (click)="makeAttack()"
+    [disabled]="!battleMonsters.first || !battleMonsters.second || battleResult">
+    Attack!
+</button>
+
+<div class="battle-messages"></div>
+
+<button 
+    type="button" 
+    class="btn btn-warning hidden bottom-button"
+    (click)="makeAttack()"
+    [disabled]="!battleMonsters.first || !battleMonsters.second || battleResult">
+    Attack!
+</button>
 
 <h4 *ngIf="battleResult">{{ battleResult }}</h4>
