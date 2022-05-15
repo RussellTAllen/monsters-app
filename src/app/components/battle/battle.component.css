@@ -2,3 +2,12 @@
     background-color: #e7e7e7;
     height: 400px;
 }
+
+.list-group-item * {
+    font-size: large;
+}
+
+.list-group-item .badge {
+    padding: 14px 17px;
+    line-height: 0;
+}
