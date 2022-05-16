@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNavComponent } from './components/page-nav/page-nav.component';
 import { BattleComponent } from './components/battle/battle.component';
 import { BattleDetailsComponent } from './components/battle-details/battle-details.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BattleDetailsComponent } from './components/battle-details/battle-detai
     NavbarComponent,
     PageNavComponent,
     BattleComponent,
-    BattleDetailsComponent
+    BattleDetailsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

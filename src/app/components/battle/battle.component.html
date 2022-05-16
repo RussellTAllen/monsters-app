@@ -18,7 +18,7 @@
                 </li>
                 <li class="list-group-item">
                     <span>Hit Points:</span>
-                    <span class="badge">{{ selectedMonsters?.first?.hit_points }}</span>
+                    <span class="badge">{{ firstHP }}</span>
                 </li>
                 <li class="list-group-item">
                     <span>Strength:</span>
@@ -40,6 +40,7 @@
         </div>
         
         <app-battle-details 
+            (changeHP)="changeHP($event)"
             [battleMonsters]="selectedMonsters"
             class="battle-details col-md-4">
         </app-battle-details>
@@ -60,7 +61,7 @@
             </li>
             <li class="list-group-item">
                 <span>Hit Points:</span>
-                <span class="badge">{{ selectedMonsters?.second?.hit_points }}</span>
+                <span class="badge">{{ secondHP }}</span>
             </li>
             <li class="list-group-item">
                 <span>Strength:</span>

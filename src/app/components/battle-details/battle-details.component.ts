@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-battle-details',
@@ -7,17 +7,21 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BattleDetailsComponent implements OnInit {
   @Input() battleMonsters: any
+  @Output() changeHP = new EventEmitter<[string, number]>()
 
   attacks: [] = []
   initiative: string = ''
   private notInit: string = ''
   private firstAttackBonus: number = 0
   private secondAttackBonus: number = 0
+  firstAttackerHP: number = 0
+  secondAttackerHP: number = 0
   battleResult: string = ''
 
   constructor() {}
 
   ngOnInit(): void {
+    this.getInitiative()
     this.calculateAttackBonus()
   }
 
@@ -31,8 +35,6 @@ export class BattleDetailsComponent implements OnInit {
       return
     }
 
-    if (!this.initiative) this.getInitiative()
-
     document.querySelector('.bottom-button')?.classList.remove('hidden')
 
     // Handle attacks
@@ -44,7 +46,7 @@ export class BattleDetailsComponent implements OnInit {
 
       // TODO:  - make this print over the Hit points in the DOM and fix bug
       // this needs to be accessible outside this loop otherwise the defending monst only dies if it gets killed in one attack
-      let defMonsterHP = defendingMonster.hit_points
+      let defMonsterHP = defendingMonster.name === this.battleMonsters[this.initiative] ? this.firstAttackerHP : this.secondAttackerHP
 
       const ul = document.createElement('ul')
       ul.classList.add('list-group')
@@ -64,7 +66,11 @@ export class BattleDetailsComponent implements OnInit {
         while(dice){
           const dmg = Math.floor(Math.random() * dmgPerDie)
 
+          // BUG HERE - attacks are being added onto rather than being separate 
+          // (IE - first attack is 10HP, second is 9HP, but it removes 19 the second attack)
           defMonsterHP -= dmg
+          defendingMonster.name === this.battleMonsters[this.initiative] ? this.firstAttackerHP = defMonsterHP : this.secondAttackerHP = defMonsterHP
+          this.changeHP.emit([defendingMonster.name, defMonsterHP])
           totalDmg += dmg
 
           if (defMonsterHP <= 0){
@@ -89,6 +95,13 @@ export class BattleDetailsComponent implements OnInit {
 
     this.initiative = firstInit > secondInit ? 'first' : 'second'
     this.notInit = firstInit > secondInit ? 'second' : 'first'
+
+    this.setHP()
+  }
+
+  setHP(): void {
+    this.firstAttackerHP = this.battleMonsters[this.initiative].hit_points
+    this.secondAttackerHP = this.battleMonsters[this.notInit].hit_points
   }
 
   calculateAttackBonus(): void {
