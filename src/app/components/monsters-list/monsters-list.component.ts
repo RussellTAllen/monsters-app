@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Renderer2 } from '@angular/core';
 import { MonsterService } from 'src/app/monster.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-monsters-list',
@@ -18,12 +19,23 @@ export class MonstersListComponent implements OnInit {
   ngOnInit(): void {
     this.getMonsters()
     console.log(this.selectedMonsters)
+
+    // TEST RECURSIVE FETCH
+    this.getAllMonsters();
+  }
+
+  // TEST RECURSIVE FETCH
+  async getAllMonsters() {
+    // const test = this.monsterService.getAllMonsters(1).subscribe(x => console.log('xxx', x));
+    const t = firstValueFrom(this.monsterService.getAllMonsters(1));
+    const [testData] = await Promise.all([t]);
+    console.log('testData', testData);
   }
 
   getMonsters(): void {
     this.monsterService.getMonsters()
         .subscribe(monsters => {
-          console.log(monsters)
+          // console.log(monsters)
           this.monsters = monsters
         })
   }

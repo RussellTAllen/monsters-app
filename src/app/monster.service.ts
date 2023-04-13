@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, catchError, map, tap } from 'rxjs';
+import { Observable, of, catchError, map, tap, expand, reduce, EMPTY } from 'rxjs';
 
 
 @Injectable({
@@ -48,6 +48,42 @@ export class MonsterService {
           )
     }
     return of(this.monstersData)
+  }
+
+  // TESTING RECURSIVE FETCH 
+  getPage(tPage: number): Observable<any> {
+    return this.http.get<any>('https://api.open5e.com/monsters/?page='+tPage.toString())
+      .pipe(
+        map(data => {
+          const { results } = data
+          results.forEach((monst: any) => {
+            if (monst.actions)
+              monst.actions = monst.actions.filter((action: any) => "attack_bonus" in action)
+          })
+          this.monstersData = results
+          return this.monstersData
+        })
+      )
+  }
+
+  // TESTING RECURSIVE FETCH
+  getAllMonsters(page: number) {
+    return this.getPage(page).pipe(
+      expand((res) => {
+        console.log('resssss', res);
+        if (page == 3){
+          return EMPTY
+        }
+        else {
+          page++
+          console.log(page);
+          return this.getPage(page);
+        }
+      }),
+      reduce((acc, curr) => {
+        return acc.concat(curr);
+      }, [])
+    )
   }
 
   private log(message: string) {
